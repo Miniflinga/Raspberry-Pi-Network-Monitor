@@ -1,26 +1,14 @@
 # 📡 Project Plan
 
-## 🚀 Quick Start
-
-Want to get running immediately? Follow these 3 steps:
-
-1. Create folder: `mkdir netmonitor && cd netmonitor && mkdir prometheus`
-2. Copy the docker-compose.yml and prometheus.yml below
-3. Run: `docker compose up -d`
-
-Then access Grafana at `http://<pi-ip>:3000` (admin/admin)
-
----
-
 ## ⚙️ Setup
 
-### 1. Create project folder
+### 1. Create project folder ✅
 ```bash
 mkdir netmonitor && cd netmonitor
 mkdir prometheus
 ```
 
-### 2. docker-compose.yml
+### 2. docker-compose.yml ✅
 ```yaml
 version: "3.8"
 
@@ -54,7 +42,7 @@ volumes:
   grafana-data:
 ```
 
-### 3. prometheus/prometheus.yml
+### 3. prometheus/prometheus.yml ✅
 ```yaml
 global:
   scrape_interval: 1s
@@ -76,14 +64,14 @@ scrape_configs:
           replacement: blackbox:9115
 ```
 
-### 4. Run everything
+### 4. Run everything ✅
 ```bash
 docker compose up -d
 ```
 
 ---
 
-## 🌐 Access services
+## 5. Access services ✅
 
 **Grafana**
 - URL: http://<your-pi-ip>:3000
@@ -94,7 +82,7 @@ docker compose up -d
 
 ---
 
-## 📊 Grafana setup
+## 6. Grafana setup ✅
 
 ### Add data source
 - Type: Prometheus
@@ -125,44 +113,8 @@ avg_over_time(probe_duration_seconds{instance="8.8.8.8"}[5m]) * 1000
 ---
 
 ## 🚨 Optional upgrades
-- Alerts for packet loss > 2%
 - Alerts for latency > 150ms
+- Alerts for packet loss > 2%
 - Telegram / Discord notifications
 - Multi-target monitoring (router vs internet vs DNS)
 - Add AlertManager for alert routing
-
----
-
-## 🎯 Purpose
-
-This project continuously monitors your internet connection by:
-
-- Pinging `8.8.8.8` every second
-- Logging latency and packet loss
-- Storing time-series data in Prometheus
-- Visualizing everything in Grafana dashboards
-
-It is designed to help identify:
-- ISP instability
-- Packet loss patterns
-- Latency spikes
-- Time-of-day performance issues
-
----
-
-## 🧱 Architecture
-blackbox_exporter → Prometheus → Grafana
-
----
-
-## 🧠 Why this setup
-- **Prometheus** → industry-standard for time-series monitoring
-- **blackbox_exporter** → handles ICMP pings without custom scripts
-- **Grafana** → best-in-class visualization
-- **Docker** → easy deployment and portability
-- **Raspberry Pi** → low-cost 24/7 monitoring device
-
----
-
-## 📌 Goal
-Turn your Raspberry Pi into a network monitoring probe that provides hard evidence of ISP performance issues.
